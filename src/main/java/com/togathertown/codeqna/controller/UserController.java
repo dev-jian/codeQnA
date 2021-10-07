@@ -17,22 +17,19 @@ import com.togathertown.codeqna.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @RestController
 public class UserController {
 	
-	private UserRepository userRepository;
-	
-	public UserController(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
-	
+	private final UserRepository userRepository;
+
 	@PostMapping("/users")
 	public ResponseEntity insertUsers(@RequestBody User user) {
 		System.out.println(user.toString());
 		
 		userRepository.save(user);
 		
-		return new ResponseEntity<String>("Success", HttpStatus.OK);
+		return new ResponseEntity<>("Success", HttpStatus.OK);
 	} 
 	
 	@GetMapping("/users")
